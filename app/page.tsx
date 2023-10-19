@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -27,58 +28,60 @@ export default function Home() {
   }, [currentCharge, manufacturer, model]);
 
   return (
-    <div className="App">
-      <h1>EV Charge Time Calculator</h1>
-      <div className="calculator">
-        <label htmlFor="currentCharge">Current State of Charge (%)</label>
-        <input
-          type="number"
-          id="currentCharge"
-          min="0"
-          max="100"
-          step="1"
-          value={currentCharge}
-          onChange={(e) => setCurrentCharge(e.target.value)}
-          required
-        />
+    <div className="bg-slate-200 sw-full grid place-content-center">
+      <div className="w-6/12 bg-white">
+        <h1>EV Charge Time Calculator</h1>
+        <div className="">
+          <label htmlFor="currentCharge">Current State of Charge (%)</label>
+          <input
+            type="number"
+            id="currentCharge"
+            min="0"
+            max="100"
+            step="1"
+            value={currentCharge}
+            onChange={(e) => setCurrentCharge(e.target.value)}
+            required
+          />
 
-        <label htmlFor="manufacturer">Vehicle Manufacturer</label>
-        <select
-          id="manufacturer"
-          value={manufacturer}
-          onChange={(e) => setManufacturer(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select Manufacturer
-          </option>
-          {manufacturers.map((manu) => (
-            <option key={manu} value={manu}>
-              {manu}
+          <label htmlFor="manufacturer">Vehicle Manufacturer</label>
+          <select
+            id="manufacturer"
+            value={manufacturer}
+            onChange={(e) => setManufacturer(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select Manufacturer
             </option>
-          ))}
-        </select>
+            {manufacturers.map((manu) => (
+              <option key={manu} value={manu}>
+                {manu}
+              </option>
+            ))}
+          </select>
 
-        <label htmlFor="model">Vehicle Model</label>
-        <select
-          id="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select Model
-          </option>
-          {modelsByManufacturer[manufacturer]?.map((mod) => (
-            <option key={mod} value={mod}>
-              {mod}
+          <label htmlFor="model">Vehicle Model</label>
+          <select
+            id="model"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+            required
+          >
+            <option value="" disabled>
+              Select Model
             </option>
-          ))}
-        </select>
+            {modelsByManufacturer[manufacturer]?.map((mod) => (
+              <option key={mod} value={mod}>
+                {mod}
+              </option>
+            ))}
+          </select>
 
-        <div id="result">
-          Estimated Charge Time: {estimatedTime.hours} hours{" "}
-          {estimatedTime.minutes} minutes
+          <div id="result">
+            Estimated Charge Time: {estimatedTime.hours} hours{" "}
+            {estimatedTime.minutes} minutes
+          </div>
         </div>
       </div>
     </div>
